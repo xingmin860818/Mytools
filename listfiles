@@ -1,0 +1,25 @@
+#!/usr/bin/env python
+
+import os
+import time
+filelis = []
+def listdir(dir):
+	lis = os.listdir(dir)
+	path = os.path.abspath(dir)
+	for file in lis:
+		abspath = os.path.join(path,file)
+		if os.path.isdir(abspath):
+			listdir(abspath)
+
+		else:
+			filelis.append(abspath)
+	return filelis
+
+def get_mtime(listdir):
+	for i in listdir:
+		mtime = time.ctime(os.path.getmtime(i))
+		filesize = (os.path.getsize(i)/1024)
+		print ('%s\t%sKB\t%s') % (mtime,filesize,i)
+
+
+get_mtime(listdir('.'))
