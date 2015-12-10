@@ -26,7 +26,6 @@ class Logs(object):
                         os.mknod(file,0644)
         #切割日志后进行服务重新加载（nginx）
         def restartService(self,servicename):
-                print os.listdir(self.logpath)
                 command = 'service {} reload'.format(servicename)
                 #os.popen(command).readlines()
                 os.system(command)
@@ -49,6 +48,7 @@ class Logs(object):
                 for file in files:
                         if re.match(r'.*\.log\d{4}-\d{2}-\d{2}\.zip$',file):
                                 shutil.copy(file,backpath)
+                                os.remove(file)
 if __name__ == '__main__':
         l = Logs('/var/log/nginx/')
         l.statisticsLog()
