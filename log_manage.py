@@ -49,12 +49,12 @@ class Logs(object):
                 for file in files:
                         if re.match(r'.*\.log\d{4}-\d{2}-\d{2}\.zip$',file):
                                 shutil.copy(file,backpath)
-        if __name__ == '__main__':
-                l = Logs('/var/log/nginx/')
-                l.statisticsLog()
-                l.cutLog()
-                l.restartService('nginx')
-                l.zipLog()
-                l.backup('/tmp')
+if __name__ == '__main__':
+        l = Logs('/var/log/nginx/')
+        l.statisticsLog()
+        l.cutLog()
+        l.restartService('nginx')
+        l.zipLog()
+        l.backup('/tmp')
 
         
