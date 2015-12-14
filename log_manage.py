@@ -25,7 +25,7 @@ class Logs(object):
 			os.mknod(file,0644)
 	#切割日志后进行服务重新加载（nginx）
 	def restartService(self,servicename):
-		command = 'service {} reload'.format(servicename)
+		command = 'service %s reload' % (servicename)
 		#os.popen(command).readlines()
 		os.system(command)
 	#定义压缩文件函数
@@ -51,12 +51,12 @@ class Logs(object):
 				os.remove(file)
 
 if __name__ == '__main__':
-	l = Logs('/var/log/nginx/')
+	l = Logs('/usr/local/nginx/logs/')
 	l.statisticsLog()
 	l.cutLog()
 	l.restartService('nginx')
 	l.zipLog()
-	l.backup('/tmp/')
+	l.backup('/opt/')
 
 
         
